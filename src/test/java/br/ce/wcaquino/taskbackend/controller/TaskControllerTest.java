@@ -9,6 +9,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.ce.wcaquino.taskbackend.model.Task;
 import br.ce.wcaquino.taskbackend.repo.TaskRepo;
@@ -73,5 +77,12 @@ public class TaskControllerTest {
 		
 		Mockito.verify(taskRepo).save(todo);
 	}
+	
+	@DeleteMapping(value = "/{id}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT )
+	public void delete(@PathVariable Long id) {
+		todoRepo.deleteById(id);
+	}
+	
 }
 
